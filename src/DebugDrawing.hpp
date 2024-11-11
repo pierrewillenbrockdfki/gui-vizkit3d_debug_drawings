@@ -16,33 +16,33 @@ namespace V3DD
     //These must be declared static so they do not create global symbols.
     //Those global symbols would conflict with the symbols declared in other
     //shared objects when ENABLE_DEBUG_DRAWINGS has been #defined there.
-    static void CONFIGURE_DEBUG_DRAWINGS_STANDALONE(){}
-    static void CONFIGURE_DEBUG_DRAWINGS_USE_EXISTING_WIDGET(...){}
+    static inline void CONFIGURE_DEBUG_DRAWINGS_STANDALONE(){}
+    static inline void CONFIGURE_DEBUG_DRAWINGS_USE_EXISTING_WIDGET(...){}
 
 #ifdef USE_PORTS    
-    static void CONFIGURE_DEBUG_DRAWINGS_USE_PORT(...){}
+    static inline void CONFIGURE_DEBUG_DRAWINGS_USE_PORT(...){}
 #endif
-    static void CONFIGURE_DEBUG_DRAWINGS_USE_EXISTING_WIDGET_NO_THROW(...){}
+    static inline void CONFIGURE_DEBUG_DRAWINGS_USE_EXISTING_WIDGET_NO_THROW(...){}
     
     #define V3DD_DECLARE_DEBUG_DRAWING_CHANNEL(...)
     
-    static void DRAW_WIREFRAME_BOX(...){}
-    static void DRAW_ARROW(...){}
-    static void DRAW_RING(...){}
-    static void DRAW_SPHERE(...){}
-    static void DRAW_CYLINDER(...){}
-    static void DRAW_POLYLINE(...){}
-    static void DRAW_LINE(...){}
-    static void DRAW_TEXT(...){}
-    static void DRAW_AXES(...){}
-    static void DRAW_AABB(...){}
-    static void PLOT_2D(...){}
-    static void CLEAR_PLOT(...){}
-    static void REMOVE_DRAWING(...){}
-    static void CLEAR_DRAWING(...){}
-    static void FLUSH_DRAWINGS(){}
-    static void COMPLEX_DRAWING(...){}
-    static std::vector<std::string> GET_DECLARED_CHANNELS(){return std::vector<std::string>();}
+    static inline void DRAW_WIREFRAME_BOX(...){}
+    static inline void DRAW_ARROW(...){}
+    static inline void DRAW_RING(...){}
+    static inline void DRAW_SPHERE(...){}
+    static inline void DRAW_CYLINDER(...){}
+    static inline void DRAW_POLYLINE(...){}
+    static inline void DRAW_LINE(...){}
+    static inline void DRAW_TEXT(...){}
+    static inline void DRAW_AXES(...){}
+    static inline void DRAW_AABB(...){}
+    static inline void PLOT_2D(...){}
+    static inline void CLEAR_PLOT(...){}
+    static inline void REMOVE_DRAWING(...){}
+    static inline void CLEAR_DRAWING(...){}
+    static inline void FLUSH_DRAWINGS(){}
+    static inline void COMPLEX_DRAWING(...){}
+    static inline std::vector<std::string> GET_DECLARED_CHANNELS(){return std::vector<std::string>();}
 }
 #else
  
