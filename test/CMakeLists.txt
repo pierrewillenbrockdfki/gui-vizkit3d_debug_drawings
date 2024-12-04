@@ -6,6 +6,7 @@ if (ROCK_QT_VERSION_4)
             vizkit3d_debug_drawings
     )
     target_compile_definitions(draw_test_standalone PUBLIC -DENABLE_DEBUG_DRAWINGS)
+    target_compile_features(draw_test_standalone PRIVATE cxx_std_11)
 
 
 
@@ -16,6 +17,7 @@ if (ROCK_QT_VERSION_4)
             vizkit3d_debug_drawings
     )
     target_compile_definitions(draw_test_attach PUBLIC -DENABLE_DEBUG_DRAWINGS)
+    target_compile_features(draw_test_attach PRIVATE cxx_std_11)
 
 
 
@@ -31,6 +33,7 @@ if (ROCK_QT_VERSION_4)
     )
     target_compile_definitions(serialization_test PUBLIC -DENABLE_DEBUG_DRAWINGS)
     target_link_libraries(serialization_test ${Boost_LIBRARIES} )
+    target_compile_features(serialization_test PRIVATE cxx_std_11)
 
 
     #draw_test_disabled does not set -DENABLE_DEBUG_DRAWINGS to test if everything is disabled correctly
@@ -38,6 +41,7 @@ if (ROCK_QT_VERSION_4)
         DEPS
             vizkit3d_debug_drawings
     )
+    target_compile_features(draw_test_disabled PRIVATE cxx_std_11)
 endif()
 
 
@@ -48,6 +52,7 @@ if (ROCK_QT_VERSION_5)
             vizkit3d_debug_drawings-qt5
     )
     target_compile_definitions(draw_test_standalone-qt5 PUBLIC -DENABLE_DEBUG_DRAWINGS)
+    target_compile_features(draw_test_standalone-qt5 PRIVATE cxx_std_11)
 
 
 
@@ -58,6 +63,7 @@ if (ROCK_QT_VERSION_5)
             vizkit3d_debug_drawings-qt5
     )
     target_compile_definitions(draw_test_attach-qt5 PUBLIC -DENABLE_DEBUG_DRAWINGS)
+    target_compile_features(draw_test_attach-qt5 PRIVATE cxx_std_11)
 
 
 
@@ -73,6 +79,7 @@ if (ROCK_QT_VERSION_5)
     )
     target_compile_definitions(serialization_test-qt5 PUBLIC -DENABLE_DEBUG_DRAWINGS)
     target_link_libraries(serialization_test-qt5 ${Boost_LIBRARIES} )
+    target_compile_features(serialization_test-qt5 PRIVATE cxx_std_11)
 
 
     #draw_test_disabled does not set -DENABLE_DEBUG_DRAWINGS to test if everything is disabled correctly
@@ -80,4 +87,52 @@ if (ROCK_QT_VERSION_5)
         DEPS
             vizkit3d_debug_drawings-qt5
     )
+    target_compile_features(draw_test_disabled-qt5 PRIVATE cxx_std_11)
 endif()
+
+rock_library(draw_test_library_enabled draw_test_library.cpp
+    DEPS
+        vizkit3d_debug_drawings-commands
+    )
+target_compile_definitions(draw_test_library_enabled PRIVATE -DENABLE_DEBUG_DRAWINGS)
+target_compile_features(draw_test_library_enabled PRIVATE cxx_std_11)
+
+rock_library(draw_test_library_disabled draw_test_library.cpp
+    DEPS
+        vizkit3d_debug_drawings-commands
+    )
+target_compile_features(draw_test_library_disabled PRIVATE cxx_std_11)
+
+rock_executable(draw_test_lib_enabled_app_enabled draw_test_lib_app.cpp
+    DEPS
+        vizkit3d_debug_drawings
+        draw_test_library_enabled
+)
+target_compile_definitions(draw_test_lib_enabled_app_enabled PRIVATE -DENABLE_DEBUG_DRAWINGS)
+target_compile_features(draw_test_lib_enabled_app_enabled PRIVATE cxx_std_11)
+
+rock_executable(draw_test_lib_disabled_app_enabled draw_test_lib_app.cpp
+    DEPS
+        vizkit3d_debug_drawings
+        draw_test_library_disabled
+)
+target_compile_definitions(draw_test_lib_disabled_app_enabled PRIVATE -DENABLE_DEBUG_DRAWINGS)
+target_compile_features(draw_test_lib_disabled_app_enabled PRIVATE cxx_std_11)
+
+rock_executable(draw_test_lib_disabled_app_disabled draw_test_lib_app.cpp
+    DEPS
+        vizkit3d_debug_drawings
+        draw_test_library_disabled
+)
+target_compile_features(draw_test_lib_disabled_app_disabled PRIVATE cxx_std_11)
+
+rock_executable(draw_test_lib_enabled_app_disabled draw_test_lib_app.cpp
+    DEPS
+        vizkit3d_debug_drawings
+        draw_test_library_enabled
+)
+target_compile_features(draw_test_lib_enabled_app_disabled PRIVATE cxx_std_11)
+
+if(WITH_PORTS)
+add_subdirectory(ports)
+endif(WITH_PORTS)
